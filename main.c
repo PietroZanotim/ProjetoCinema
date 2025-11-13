@@ -1,0 +1,254 @@
+#include <stdio.h>
+#include <string.h>
+
+struct Sessoes{
+    char horario[6];
+    char assento[15][15];
+};
+
+struct Filmes{
+    int id;
+    char nome[50];
+    struct Sessoes sessoes[7];
+    int limIdade;
+    float valorIngresso;
+};
+
+
+struct Usuarios{
+    char nome[30];
+    int idade;
+    char cpf[15];
+    char senha[15];
+    float saldo;
+};
+
+struct Reservas{
+    int id;
+    char nomeUsuario[30];
+    char nomeFilme[50];
+    char nomeSessao[6];
+    int nomeAssento;
+};
+
+int validaCpf(struct Usuarios usuarios[], int qtdUsuarios, int *posicao){
+    int flag=0;
+    char cpftemp[15];
+    strcpy(cpftemp,"");
+    
+    fgets(cpftemp,15,stdin);
+    cpftemp[strcspn(cpftemp,"\n")] = '\0';
+    
+    for(int i = 0; i < qtdUsuarios; i++){
+        if(strcmp(cpftemp,usuarios[i].cpf)==0){
+            flag=1;
+            *posicao=i;
+        } 
+    }
+  
+    if(flag==0){
+    printf("CPF não encontrado, digite novamente: ");
+    }
+    
+    return flag;
+}
+
+int validaSenha(struct Usuarios usuarios[], int qtdUsuarios, int posicao){
+    int flag=0;
+    char senhaTemp[15];
+    
+    fgets(senhaTemp,15,stdin);
+    senhaTemp[strcspn(senhaTemp,"\n")] = '\0';
+                        
+    if(strcmp(senhaTemp,usuarios[posicao].senha)==0){
+        flag=1;
+    } 
+    
+                        
+    if(flag==0){
+        printf("Senha inválida, digite novamente: ");
+    }
+    
+    return flag;
+}
+
+int escolha1(){
+    
+    int opcaoTemp;
+    printf("Digite a ação que deseja realizar: \n");
+        printf("[1] Login.\n");
+        printf("[2] Cadastrar.\n");
+        printf("[3] Sair.\n");
+        
+        do{
+            
+            scanf("%d", &opcaoTemp);
+            if(!(opcaoTemp==1 || opcaoTemp==2 || opcaoTemp==3)){
+                printf("\nOpcao inválida! Digite novamente: ");
+            }
+            
+        }while(!(opcaoTemp==1 || opcaoTemp==2 || opcaoTemp==3));
+    
+    return opcaoTemp;
+}
+
+int escolha2(){
+
+    int opcaoTemp;
+    printf("Digite a ação que deseja realizar: \n");
+    printf("[1] Reservar.\n");
+    printf("[2] Visualizar suas reservas.\n");
+    printf("[3] Saldo/Deposito em conta.\n");
+    printf("[4] Sair.\n");
+        
+    do{
+        scanf("%d", &opcaoTemp);
+        if(!(opcaoTemp==1 || opcaoTemp==2 || opcaoTemp==3 || opcaoTemp==4)){
+            printf("\nOpcao inválida! Digite novamente: ");
+        }
+    }while(!(opcaoTemp==1 || opcaoTemp==2 || opcaoTemp==3 || opcaoTemp==4));
+
+    return opcaoTemp;
+}
+
+/*void listarInicial(int a, struct Filmes *filmes[]){
+    
+    int i=0;
+    
+    while( i < a){
+        int flag=1;
+        printf("id Nº%d: ", (i+1));
+        scanf("%d", &filmes[i]->id);
+        
+        for(int b=0; b < i; b++){
+            if(filmes[i]->id==filmes[b]->id){
+                flag=0;
+                break;
+            }
+        }
+        
+        if(flag==0){
+            continue;
+        }
+        
+        getchar();
+        fgets(filmes[i]->nome,49,stdin);
+        filmes[i]->nome[strcspn(filmes[i]->nome,"\n")] = '\0';
+        
+        for(int b = 0; b < 6; i++){
+            
+            fgets(filmes[i]->horario[b].horas,5,stdin);
+            filmes[i]->horario[b].horas[strcspn(filmes[i]->horario[b].horas,"\n")] = '\0';
+            
+            int atribuiAssentos=1;
+            for(int c = 0; c < 15; c++){
+                for(int d = 0; d < 15; d++){
+                    filmes[i]->horario[b].assento[c][d] = atribuiAssentos;
+                    atribuiAssentos++;
+                }
+            }
+            
+        }
+        
+        i++;
+        
+    }
+    
+};
+*/
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
+int main(){
+    
+    int idReservas=0; // Para marcar o id das reservas;
+    // Colocando um tamanho fixo, até vermos vetor dinâmico;
+    int qtdFilmes=3; 
+    int qtdUsuarios=5;
+    int qtdReservas=4050;
+    
+    struct Filmes filmes[qtdFilmes];
+    struct Usuarios usuarios[qtdUsuarios];
+    struct Reservas reservas[qtdReservas];
+
+    strcpy(usuarios[0].cpf,"111.111.111-00");
+    strcpy(usuarios[0].senha,"123456");
+    
+    //listarInicial(qtdFilmes, &filmes); Desconsiderar por enquanto
+    
+    printf("Olá! Seja bem-vindo.\n");
+    
+    while(1){
+        
+        int opcao;
+        opcao = escolha1(); // Menu;
+        getchar();
+        
+        switch(opcao){
+            
+                case 1: // Login do usuario;
+                    int posicao;
+                    int flag;
+                    
+                    printf("Digite seu CPF (000.000.000-00): ");
+                    
+                    do{
+                        
+                        flag = validaCpf(usuarios, qtdUsuarios, &posicao);
+                        
+                    } while(flag==0);
+                    getchar();
+
+                    printf("Digite sua senha: ");
+                    
+                    do{
+                        
+                       flag = validaSenha(usuarios, qtdUsuarios, posicao);
+                        
+                    }while(flag==0);
+                    
+                    printf("\n\nLogin realizado com sucesso!\n\n"); // Abaixo segue oque usuario pode fazer;
+                    
+                    opcao = escolha2();
+                    
+                    switch(opcao){
+                        
+                        case 1:
+                        break;
+                        
+                        case 2:
+                        break;
+                        
+                        case 3:
+                        break;
+                        
+                        
+                    }
+                    
+                    
+                break;
+                
+                case 2: // Cadastro do usuário;
+                
+                
+                
+                break;
+                
+                default: // Saida do sistema para menu novamente;
+                break;
+                
+        }
+        
+        if(opcao==3){
+            break;
+        }
+        
+    }
+    
+    
+    printf("\n_________\nEncerrando...\n\n");
+    
+    return 0;
+
+}
