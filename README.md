@@ -108,18 +108,12 @@ O programa apresenta um menu principal que permite ao usuário navegar por todas
 ## 💾 Persistência de Dados e Gerenciamento de Memória
 
 ### Persistência
-O programa garante a persistência de dados através de arquivos binários separados para cada estrutura :
-* `sessoes.bin`
-* `usuarios.bin`
-* `reservas.bin`
+Em construção...
 
 Os dados são carregados dos arquivos para os vetores na inicialização do programa e salvos de volta nos arquivos ao selecionar a opção "Sair" .
 
 ### Gerenciamento de Memória
-Os vetores para as três estruturas são implementados com **alocação dinâmica de memória** (ex: `malloc`, `realloc`) . O gerenciamento de memória é feito de forma controlada:
-1.  O programa realoca o vetor quando o limite é atingido .
-2.  A realocação é feita em blocos (ex: 5 posições extras) para evitar realocações a cada nova inserção .
-3.  O programa também monitora o espaço livre em caso de remoções .
+Em construção..
 
 ---
 
@@ -148,11 +142,7 @@ Este projeto foi desenvolvido e testado para atender rigorosamente ao ambiente d
 4.  O programa deve carregar automaticamente os dados dos arquivos `.bin` pré-preenchidos (com 10+ registros) , que estão localizados na pasta do projeto .
 
 ### Estrutura de Arquivos
+Em construção...
 A pasta do projeto contém :
 * `main.c`: Contém a lógica do menu e o fluxo principal .
-* `sessoes.c` / `sessoes.h`: Funções dedicadas ao gerenciamento de sessões.
-* `usuarios.c` / `usuarios.h`: Funções dedicadas ao gerenciamento de usuários.
-* `reservas.c` / `reservas.h`: Funções dedicadas ao gerenciamento de reservas e relatórios.
-* `Trabalho_Cinema.cbp`: O arquivo de projeto do CodeBlocks.
-* `sessoes.bin`, `usuarios.bin`, `reservas.bin`: Arquivos de dados pré-preenchidos .
 * `README.md`: Este arquivo.
