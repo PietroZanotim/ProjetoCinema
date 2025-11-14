@@ -137,9 +137,7 @@ Este projeto foi desenvolvido e testado para atender rigorosamente ao ambiente d
 
 ### Passos para Execução
 1.  Clone este repositório.
-2.  Abra o arquivo de projeto `.cbp` (ex: `Trabalho_Cinema.cbp`) no CodeBlocks.
-3.  Compile e execute o projeto (F9 ou 'Build and Run').
-4.  O programa deve carregar automaticamente os dados dos arquivos `.bin` pré-preenchidos (com 10+ registros) , que estão localizados na pasta do projeto .
+Em construção...
 
 ### Estrutura de Arquivos
 Em construção...
