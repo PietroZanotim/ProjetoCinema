@@ -121,13 +121,25 @@ Usuarios cadastro(){
     printf("=========================================\n");
     printf("                Cadastro\n");
     printf("=========================================\n\n");
-    printf("        Digite o seu nome completo          ");
+    printf("        Digite o seu nome completo         \n");
     printf("\n-----------------------------------------\n");
     printf("Nome: ");
 
     // Limpa o buffer de entrada para a próxima iteração
     while (getchar() != '\n'); 
     fgets(usuarios_func.nome, sizeof(usuarios_func.nome),stdin);
+
+    limparTela(); 
+
+    printf("=========================================\n");
+    printf("                Cadastro\n");
+    printf("=========================================\n\n");
+    printf("        Digite a sua idade (ex.: 20)\n");
+    printf("\n-----------------------------------------\n");
+    printf("Idade: ");
+
+    // nao utilizo o loop para limpar o buffer aqui, porque o fgets anterior consumirá o \n e o loop ficará infinito.
+    scanf(" %d",&usuarios_func.idade);
 
     limparTela(); 
 
@@ -141,6 +153,19 @@ Usuarios cadastro(){
     // Limpa o buffer de entrada para a próxima iteração
     while (getchar() != '\n'); 
     fgets(usuarios_func.cpf, sizeof(usuarios_func.cpf),stdin);
+
+    limparTela(); 
+
+    printf("=========================================\n");
+    printf("                Cadastro\n");
+    printf("=========================================\n\n");
+    printf("           Digite a sua senha\n");
+    printf("\n-----------------------------------------\n");
+    printf("Senha: ");
+
+    // Limpa o buffer de entrada para a próxima iteração
+    while (getchar() != '\n'); 
+    fgets(usuarios_func.senha, sizeof(usuarios_func.senha),stdin);
 
     return usuarios_func;
    
