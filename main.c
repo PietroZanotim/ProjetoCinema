@@ -111,23 +111,26 @@ int opcao1(){
 //-----------------------------------------------------------------------------
 //---------------------------{ OPCAO 2 - CADASTRO }----------------------------
 //-----------------------------------------------------------------------------
-int escolha2(){
+Usuarios cadastro(){
 
-    int opcaoTemp;
-    printf("Digite a ação que deseja realizar: \n");
-    printf("[1] Reservar.\n");
-    printf("[2] Visualizar suas reservas.\n");
-    printf("[3] Saldo/Deposito em conta.\n");
-    printf("[4] Sair.\n");
-        
-    do{
-        scanf("%d", &opcaoTemp);
-        if(!(opcaoTemp==1 || opcaoTemp==2 || opcaoTemp==3 || opcaoTemp==4)){
-            printf("\nOpcao inválida! Digite novamente: ");
-        }
-    }while(!(opcaoTemp==1 || opcaoTemp==2 || opcaoTemp==3 || opcaoTemp==4));
+    // Inicializar structs dentro de cadastro para depoin enviar para as structs inicializadas na main
+    Usuarios usuarios_func;
 
-    return opcaoTemp;
+    limparTela(); 
+
+        printf("=========================================\n");
+        printf("                Cadastro\n");
+        printf("=========================================\n\n");
+        printf("        Digite o seu nome completo          ");
+        printf("\n-----------------------------------------\n");
+        printf("Nome: ");
+
+        // Limpa o buffer de entrada para a próxima iteração
+        while (getchar() != '\n'); 
+        fgets(usuarios_func.nome, sizeof(usuarios_func.nome),stdin);
+    
+        return usuarios_func;
+   
 }
 
 //-----------------------------------------------------------------------------
@@ -283,15 +286,10 @@ int main(){
     int qtdUsuarios=5;
     int qtdReservas=4050;
     
-    struct Usuarios usuarios[qtdUsuarios];
-    struct Reservas reservas[qtdReservas];
-
-    strcpy(usuarios[0].cpf,"111.111.111-00");
-    strcpy(usuarios[0].senha,"123456");
-    
     //listarInicial(qtdFilmes, &filmes); Desconsiderar por enquanto
 
-    
+    // Inicializar structs 
+    Usuarios usuarios[qtdUsuarios];
 
     while (1) {
         // Inicializa o menu e atribui o valor a variável opcao.
@@ -303,6 +301,7 @@ int main(){
                 break;
             
             case 2:
+                usuarios[0] = cadastro();
                 break;
 
             case 3:
@@ -314,80 +313,5 @@ int main(){
                 else {return 0;}
         }
     }
-
-    
-
-    while(1){
-        
-        int opcao;
-        //opcao = escolha1(); // Menu;
-        getchar();
-        
-
-        switch(opcao){
-            
-                case 1: // Login do usuario;
-                    int posicao;
-                    int flag;
-                    
-                    printf("Digite seu CPF (000.000.000-00): ");
-                    
-                    do{
-                        
-                        flag = validaCpf(usuarios, qtdUsuarios, &posicao);
-                        
-                    } while(flag==0);
-                    getchar();
-
-                    printf("Digite sua senha: ");
-                    
-                    do{
-                        
-                       flag = validaSenha(usuarios, qtdUsuarios, posicao);
-                        
-                    }while(flag==0);
-                    
-                    printf("\n\nLogin realizado com sucesso!\n\n"); // Abaixo segue oque usuario pode fazer;
-                    
-                    opcao = escolha2();
-                    
-                    switch(opcao){
-                        
-                        case 1:
-                        break;
-                        
-                        case 2:
-                        break;
-                        
-                        case 3:
-                        break;
-                        
-                        
-                    }
-                    
-                    
-                break;
-                
-                case 2: // Cadastro do usuário;
-                
-                
-                
-                break;
-                
-                default: // Saida do sistema para menu novamente;
-                break;
-                
-        }
-        
-        if(opcao==3){
-            break;
-        }
-        
-    }
-    
-    
-    printf("\n_________\nEncerrando...\n\n");
-    
-    return 0;
 
 }
