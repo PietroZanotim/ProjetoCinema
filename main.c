@@ -33,6 +33,58 @@ typedef struct Reservas{
     char assento[4];        // Informação adicional (ex: "F10")
 } Reservas;
  
+//-----------------------------------------------------------------------------
+//---------------------------{ FUNCÕES AUXILIARES }----------------------------
+//-----------------------------------------------------------------------------
+
+int validarCPF(){
+    char cpf[15];
+    fgets(cpf, sizeof(cpf),stdin);
+    if (cpf[3] && cpf[7] != '.') return 0;
+    if (cpf[11] != '-') return 0;
+    return 1;
+}
+
+int buscaCpf(struct Usuarios usuarios[], int qtdUsuarios, int *posicao){
+    int flag=0;
+    char cpftemp[15];
+    strcpy(cpftemp,"");
+    
+    fgets(cpftemp,15,stdin);
+    cpftemp[strcspn(cpftemp,"\n")] = '\0';
+    
+    for(int i = 0; i < qtdUsuarios; i++){
+        if(strcmp(cpftemp,usuarios[i].cpf)==0){
+            flag=1;
+            *posicao=i;
+        } 
+    }
+  
+    if(flag==0){
+    printf("CPF não encontrado, digite novamente: ");
+    }
+    
+    return flag;
+}
+
+int validaSenha(struct Usuarios usuarios[], int qtdUsuarios, int posicao){
+    int flag=0;
+    char senhaTemp[15];
+    
+    fgets(senhaTemp,15,stdin);
+    senhaTemp[strcspn(senhaTemp,"\n")] = '\0';
+                        
+    if(strcmp(senhaTemp,usuarios[posicao].senha)==0){
+        flag=1;
+    } 
+
+        if(flag==0){
+        printf("Senha inválida, digite novamente: ");
+    }
+    
+    return flag;
+}
+
 // Função para limpar a tela verificando qual o OS
 void limparTela() {
     #if defined(_WIN32) || defined(_WIN64)
@@ -152,7 +204,10 @@ Usuarios cadastro(){
 
     // Limpa o buffer de entrada para a próxima iteração
     while (getchar() != '\n'); 
-    fgets(usuarios_func.cpf, sizeof(usuarios_func.cpf),stdin);
+    while (validarCPF() == 0) {
+        puts("Você digitou o CPF incorretamente");
+        puts("Digite o seu CPF neste fomato XXX.XXX.XXX-XX");
+    }
 
     limparTela(); 
 
@@ -217,49 +272,6 @@ int confirmarSaida() {
     } else {
         return 0; // 0 = Não, voltar
     }
-}
-
-
-
-int validaCpf(struct Usuarios usuarios[], int qtdUsuarios, int *posicao){
-    int flag=0;
-    char cpftemp[15];
-    strcpy(cpftemp,"");
-    
-    fgets(cpftemp,15,stdin);
-    cpftemp[strcspn(cpftemp,"\n")] = '\0';
-    
-    for(int i = 0; i < qtdUsuarios; i++){
-        if(strcmp(cpftemp,usuarios[i].cpf)==0){
-            flag=1;
-            *posicao=i;
-        } 
-    }
-  
-    if(flag==0){
-    printf("CPF não encontrado, digite novamente: ");
-    }
-    
-    return flag;
-}
-
-int validaSenha(struct Usuarios usuarios[], int qtdUsuarios, int posicao){
-    int flag=0;
-    char senhaTemp[15];
-    
-    fgets(senhaTemp,15,stdin);
-    senhaTemp[strcspn(senhaTemp,"\n")] = '\0';
-                        
-    if(strcmp(senhaTemp,usuarios[posicao].senha)==0){
-        flag=1;
-    } 
-    
-                        
-    if(flag==0){
-        printf("Senha inválida, digite novamente: ");
-    }
-    
-    return flag;
 }
 
 //-----------------------------------------------------------------------------
