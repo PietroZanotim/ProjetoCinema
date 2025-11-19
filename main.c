@@ -38,6 +38,7 @@ typedef struct Reservas{
 //-----------------------------------------------------------------------------
 
 int validarCPF(){
+    int i;
     char cpf[15];
     fgets(cpf, sizeof(cpf),stdin);
     // Remover quebra de linha se existir
@@ -47,7 +48,7 @@ int validarCPF(){
     // 2. Verificar formato fixo XXX.XXX.XXX-XX
     if (cpf[3] != '.' || cpf[7] != '.' || cpf[11] != '-') return 0;
     // 3. Verificar se os dígitos são numéricos
-    for (int i = 0; i < 14; i++) {
+    for (i = 0; i < 14; i++) {
         if (i == 3 || i == 7 || i == 11) continue; // posições de pontuação
 
         if (!isdigit(cpf[i])) return 0;
@@ -56,6 +57,7 @@ int validarCPF(){
 }
 
 int buscaCpf(struct Usuarios usuarios[], int qtdUsuarios, int *posicao){
+    int i;
     int flag=0;
     char cpftemp[15];
     strcpy(cpftemp,"");
@@ -63,7 +65,7 @@ int buscaCpf(struct Usuarios usuarios[], int qtdUsuarios, int *posicao){
     fgets(cpftemp,15,stdin);
     cpftemp[strcspn(cpftemp,"\n")] = '\0';
     
-    for(int i = 0; i < qtdUsuarios; i++){
+    for(i = 0; i < qtdUsuarios; i++){
         if(strcmp(cpftemp,usuarios[i].cpf)==0){
             flag=1;
             *posicao=i;
