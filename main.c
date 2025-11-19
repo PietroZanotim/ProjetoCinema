@@ -40,8 +40,18 @@ typedef struct Reservas{
 int validarCPF(){
     char cpf[15];
     fgets(cpf, sizeof(cpf),stdin);
-    if (cpf[3] != '.' || cpf[7] != '.') return 0;
-    if (cpf[11] != '-') return 0;
+    // Remover quebra de linha se existir
+    cpf[strcspn(cpf, "\n")] = '\0';
+    // 1. Verificar tamanho
+    if (strlen(cpf) != 14) return 0;
+    // 2. Verificar formato fixo XXX.XXX.XXX-XX
+    if (cpf[3] != '.' || cpf[7] != '.' || cpf[11] != '-') return 0;
+    // 3. Verificar se os dígitos são numéricos
+    for (int i = 0; i < 14; i++) {
+        if (i == 3 || i == 7 || i == 11) continue; // posições de pontuação
+
+        if (!isdigit(cpf[i])) return 0;
+    }
     return 1;
 }
 
@@ -202,9 +212,13 @@ Usuarios cadastro(){
     printf("\n-----------------------------------------\n");
     printf("CPF: ");
 
-    // Limpa o buffer de entrada para a próxima iteração
-    while (getchar() != '\n'); 
-    while (validarCPF() == 0) {
+    while (1) {
+        // Limpa o buffer sempre antes de ler
+        while (getchar() != '\n');
+
+        // Forma compacta de if(validarCPF() != 0) break;
+        if (validarCPF()) break;
+
         puts("Você digitou o CPF incorretamente");
         puts("Digite o seu CPF neste fomato XXX.XXX.XXX-XX");
         printf("CPF: ");
