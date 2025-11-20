@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+
+
 // (S1) Registro Independente 1 
 typedef struct Sessoes{
     int id;
@@ -24,6 +26,10 @@ typedef struct Usuarios{
     char senha[15];
     float saldo;
 }Usuarios;
+//-----------------------------------------------------------------------------
+int const qtdUsuarios=5;//Inicializado o vetor de usuarios globalmente, pois é usado não apenas na main;
+Usuarios usuarios[qtdUsuarios];
+//-----------------------------------------------------------------------------
 
 // (S3) Registro Relacional
 typedef struct Reservas{
@@ -37,26 +43,48 @@ typedef struct Reservas{
 //---------------------------{ FUNCÕES AUXILIARES }----------------------------
 //-----------------------------------------------------------------------------
 
-int validarCPF(){
+int validarCPF(char *cpf){
     int i;
-    char cpf[15];
-    fgets(cpf, sizeof(cpf),stdin);
-    // Remover quebra de linha se existir
-    cpf[strcspn(cpf, "\n")] = '\0';
+    int tamanho=0; // Usando um for pois se usarmos strlen em ponteiro irá retornar 1;
     // 1. Verificar tamanho
-    if (strlen(cpf) != 14) return 0;
+    for(int i=0; cpf[i]!='\0';i++){
+        tamanho++;
+    }
+    if(tamanho!=14){return 0;}
     // 2. Verificar formato fixo XXX.XXX.XXX-XX
     if (cpf[3] != '.' || cpf[7] != '.' || cpf[11] != '-') return 0;
     // 3. Verificar se os dígitos são numéricos
     for (i = 0; i < 14; i++) {
         if (i == 3 || i == 7 || i == 11) continue; // posições de pontuação
 
-        if (!isdigit(cpf[i])) return 0;
+        if (!(isdigit(cpf[i]))) return 0;
     }
     return 1;
 }
 
-int buscaCpf(struct Usuarios usuarios[], int qtdUsuarios, int *posicao){
+int buscaCpfCadastro(char *cpfTemp, struct Usuarios *usuarios, int qtdUsuarios){
+    
+    int i,i2;
+    int flag=0;
+    int contIguais;
+    
+    //Para validar a igualdade estamos usando um for, pois o strcmp não funciona.
+    for(i = 0; i < qtdUsuarios; i++){
+        for(i2 = 0; cpfTemp[i2] != '\0'; i2++){
+            if(usuarios[i].cpf[i2]==cpfTemp[i2]){
+                contIguais++;
+            }
+        }
+        if(contIguais==14){ //Se digito a digito for igual, então o CPF já está cadastrado.
+            flag=1;
+            return flag;
+        }
+    }
+    
+    return flag;
+}
+
+int buscaCpfLogin(struct Usuarios *usuarios, int qtdUsuarios, int *posicao){
     int i;
     int flag=0;
     char cpftemp[15];
@@ -152,25 +180,7 @@ int menuPrincipal() {
 //-----------------------------------------------------------------------------
 //---------------------------{ OPCAO 1 - LOGIN }-------------------------------
 //-----------------------------------------------------------------------------
-int opcao1(){
-    
-    int opcaoTemp;
-    printf("Digite a ação que deseja realizar: \n");
-        printf("[1] Login.\n");
-        printf("[2] Cadastrar.\n");
-        printf("[3] Sair.\n");
-        
-        do{
-            
-            scanf("%d", &opcaoTemp);
-            if(!(opcaoTemp==1 || opcaoTemp==2 || opcaoTemp==3)){
-                printf("\nOpcao inválida! Digite novamente: ");
-            }
-            
-        }while(!(opcaoTemp==1 || opcaoTemp==2 || opcaoTemp==3));
-    
-    return opcaoTemp;
-}
+
 
 //-----------------------------------------------------------------------------
 //---------------------------{ OPCAO 2 - CADASTRO }----------------------------
@@ -213,17 +223,35 @@ Usuarios cadastro(){
     printf("Digite o seu CPF neste fomato XXX.XXX.XXX-XX\n");
     printf("\n-----------------------------------------\n");
     printf("CPF: ");
+    
+    while (getchar() != '\n');
+    // Limpa o buffer sempre antes de ler
 
     while (1) {
-        // Limpa o buffer sempre antes de ler
-        while (getchar() != '\n');
+        char cpfTemp[14];
+        fgets(cpfTemp,14,stdin);
+        cpfTemp[strcspn(cpfTemp,"\n")] = '\0';
 
-        // Forma compacta de if(validarCPF() != 0) break;
-        if (validarCPF()) break;
+        //Validando se o cpf está dentro do formato e se já não foi incluido nos cadastros.
+        int flag1 = validarCPF(cpfTemp);
 
-        puts("Você digitou o CPF incorretamente");
-        puts("Digite o seu CPF neste fomato XXX.XXX.XXX-XX");
+        int flag2 = buscaCpfCadastro(cpfTemp,usuarios,qtdUsuarios);
+
+        if(flag1==0 && flag2==0){
+        puts("O CPF digitado está fora do formato ou já está cadastrado.");
+        puts("Digite o seu CPF neste formato XXX.XXX.XXX-XX.");
         printf("CPF: ");
+        } else if(flag1==0){
+        puts("Você digitou o CPF incorretamente.");
+        puts("Digite o seu CPF neste formato XXX.XXX.XXX-XX.");
+        printf("CPF: ");
+        } else if(flag2==0){
+        puts("O CPF digitado já está cadastrado.");
+        puts("Digite o seu CPF novamente.");
+        printf("CPF: ");
+        } else {
+            break;
+        }
     }
 
     limparTela(); 
@@ -301,13 +329,9 @@ int main(){
     int idReservas=0; // Para marcar o id das reservas;
     // Colocando um tamanho fixo, até vermos vetor dinâmico;
     int qtdFilmes=3; 
-    int qtdUsuarios=5;
+    int contUsuarios=0;
     int qtdReservas=4050;
-    
-    //listarInicial(qtdFilmes, &filmes); Desconsiderar por enquanto
-
-    // Inicializar structs 
-    Usuarios usuarios[qtdUsuarios];
+        
 
     while (1) {
         // Inicializa o menu e atribui o valor a variável opcao.
@@ -319,7 +343,8 @@ int main(){
                 break;
             
             case 2:
-                usuarios[0] = cadastro();
+                usuarios[contUsuarios] = cadastro();
+                contUsuarios++;
                 break;
 
             case 3:
