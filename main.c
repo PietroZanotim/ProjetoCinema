@@ -184,6 +184,73 @@ int menuPrincipal() {
 //---------------------------{ OPCAO 1 - LOGIN }-------------------------------
 //-----------------------------------------------------------------------------
 
+void login(){
+
+int resultado_validacao;
+
+limparTela(); 
+
+    printf("================================================\n");
+    printf("                      Login\n");
+    printf("================================================\n\n");
+    printf(" Digite o seu CPF neste formato XXX.XXX.XXX-XX\n");
+    printf("\n-----------------------------------------------\n");
+    printf("CPF: ");
+    
+
+    while (1) {
+        // Limpa o buffer sempre antes de ler
+        while (getchar() != '\n');
+
+        resultado_validacao = validarCPF(0);
+
+        if (resultado_validacao == 0) { // 0: CPF em formato incorreto
+            puts("\nVocê digitou o CPF incorretamente.");
+            puts("Digite o seu CPF neste fomato XXX.XXX.XXX-XX");
+            printf("CPF: ");
+        } else if (resultado_validacao == -1) { // -1: CPF já está cadastrado
+            puts("\nEsse CPF não foi encontrado.");
+            puts("Digite um outro CPF ou retorne ao menu.");
+            printf("CPF: ");
+        } else {
+            break;
+        }
+            
+    }
+
+
+    limparTela(); 
+
+    printf("=========================================\n");
+    printf("                  Login\n");
+    printf("=========================================\n\n");
+    printf("           Digite a sua senha\n");
+    printf("\n-----------------------------------------\n");
+    printf("Senha: ");
+
+    
+    while(1){
+        // Limpa o buffer de entrada para a próxima iteração
+        while (getchar() != '\n'); 
+
+        strcpy(usuarios_temp.senha,"");
+
+        fgets(usuarios_temp.senha, sizeof(usuarios_temp.senha),stdin);
+        if(strcmp(usuarios_temp.senha,usuarios[resultado_validacao].senha)==0) break;   
+        else {
+            puts("\nSenha inválida, digite novamente:");
+            printf("Senha: ");
+        }
+
+    }
+
+    limparTela();
+    printf("============================================================\n");
+    printf("Login realizado com sucesso! Digite enter para continuar:\n");
+    printf("============================================================\n");
+    getchar();
+
+}
 
 //-----------------------------------------------------------------------------
 //---------------------------{ OPCAO 2 - CADASTRO }----------------------------
@@ -337,7 +404,7 @@ int main(){
 
         switch (opcao){
             case 1:
-                /* code */
+                login();
                 break;
             
             case 2:
