@@ -86,30 +86,6 @@ int validarCPF(int cadastro){
     }
 }
 
-
-int buscaCpfLogin(struct Usuarios *usuarios, int qtdUsuarios, int *posicao){
-    int i;
-    int flag=0;
-    char cpftemp[15];
-    strcpy(cpftemp,"");
-    
-    fgets(cpftemp,15,stdin);
-    cpftemp[strcspn(cpftemp,"\n")] = '\0';
-    
-    for(i = 0; i < qtdUsuarios; i++){
-        if(strcmp(cpftemp,usuarios[i].cpf)==0){
-            flag=1;
-            *posicao=i;
-        } 
-    }
-  
-    if(flag==0){
-    printf("CPF não encontrado, digite novamente: ");
-    }
-    
-    return flag;
-}
-
 int validaSenha(struct Usuarios usuarios[], int qtdUsuarios, int posicao){
     int flag=0;
     char senhaTemp[15];
