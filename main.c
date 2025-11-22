@@ -143,14 +143,14 @@ int menuPrincipal() {
     do {
         limparTela(); 
 
-        printf("=========================================\n");
-        printf("   SISTEMA DE GERENCIAMENTO DE CINEMA\n");
-        printf("=========================================\n\n");
+        printf("==============================================\n");
+        printf("       SISTEMA DE GERENCIAMENTO DE CINEMA\n");
+        printf("==============================================\n\n");
         printf("   [1] - Fazer Login\n");
         printf("   [2] - Cadastrar Novo Usuario\n");
         printf("   [3] - Saber Mais (Sobre o Projeto)\n");
         printf("   [4] - Sair do Programa\n");
-        printf("\n-----------------------------------------\n");
+        printf("\n--------------------------------------------\n");
         printf("Digite a opcao desejada: ");
 
         // Validação de tipo de input
@@ -186,11 +186,11 @@ Usuarios cadastro(){
 
     limparTela(); 
 
-    printf("=========================================\n");
-    printf("                Cadastro\n");
-    printf("=========================================\n\n");
-    printf("        Digite o seu nome completo         \n");
-    printf("\n-----------------------------------------\n");
+    printf("================================================\n");
+    printf("                    Cadastro\n");
+    printf("================================================\n\n");
+    printf("            Digite o seu nome completo         \n");
+    printf("\n----------------------------------------------\n");
     printf("Nome: ");
 
     // Limpa o buffer de entrada para a próxima iteração
@@ -199,11 +199,11 @@ Usuarios cadastro(){
 
     limparTela(); 
 
-    printf("=========================================\n");
-    printf("                Cadastro\n");
-    printf("=========================================\n\n");
+    printf("================================================\n");
+    printf("                   Cadastro\n");
+    printf("================================================\n\n");
     printf("        Digite a sua idade (ex.: 20)\n");
-    printf("\n-----------------------------------------\n");
+    printf("\n-----------------------------------------------\n");
     printf("Idade: ");
 
     // nao utilizo o loop para limpar o buffer aqui, porque o fgets anterior consumirá o \n e o loop ficará infinito.
@@ -211,11 +211,11 @@ Usuarios cadastro(){
 
     limparTela(); 
 
-    printf("=========================================\n");
-    printf("                Cadastro\n");
-    printf("=========================================\n\n");
+    printf("================================================\n");
+    printf("                  Cadastro\n");
+    printf("================================================\n\n");
     printf("Digite o seu CPF neste formato XXX.XXX.XXX-XX\n");
-    printf("\n-----------------------------------------\n");
+    printf("\n-----------------------------------------------\n");
     printf("CPF: ");
     
 
@@ -228,11 +228,11 @@ Usuarios cadastro(){
         if (resultado_validacao == 1) { // 1: Tudo correto, CPF validado e não cadastrado
             break;
         } else if (resultado_validacao == 0) { // 0: CPF em formato incorreto
-            puts("Você digitou o CPF incorretamente.");
+            puts("\nVocê digitou o CPF incorretamente.");
             puts("Digite o seu CPF neste fomato XXX.XXX.XXX-XX");
             printf("CPF: ");
         } else if (resultado_validacao == -1) { // -1: CPF já está cadastrado
-            puts("Esse CPF já está cadastrado.");
+            puts("\nEsse CPF já está cadastrado.");
             puts("Digite um outro CPF ou retorne ao menu.");
             printf("CPF: ");
         }
