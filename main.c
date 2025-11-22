@@ -58,8 +58,9 @@ int buscaCpfCadastro(char *cpfTemp){
 
 int validarCPF(int cadastro){
     int i;
-    char cpfTemp[15];
-    fgets(cpfTemp, sizeof(cpfTemp),stdin);
+    char cpfTemp[16];
+    scanf(" %14[^\n]",cpfTemp);
+    //Caso formos voltar para o fgets: fgets(cpfTemp, sizeof(cpfTemp),stdin);
     // Remover quebra de linha se existir
     cpfTemp[strcspn(cpfTemp, "\n")] = '\0';
     // 1. Verificar tamanho
@@ -217,8 +218,6 @@ Usuarios cadastro(){
     printf("\n-----------------------------------------\n");
     printf("CPF: ");
     
-    while (getchar() != '\n');
-    // Limpa o buffer sempre antes de ler
 
     while (1) {
         // Limpa o buffer sempre antes de ler
