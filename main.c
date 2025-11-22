@@ -47,21 +47,10 @@ typedef struct Reservas{
 
 int buscaCpfCadastro(char *cpfTemp){
     
-    int i,i2;
-    int contIguais = 0;
-    
-    //Para validar a igualdade estamos usando um for, pois o strcmp não funciona.
-    for(i = 0; i < qtdUsuarios; i++){   
-        for(i2 = 0; cpfTemp[i2] != '\0'; i2++){
-            if(usuarios[i].cpf[i2]==cpfTemp[i2]){
-                contIguais++;
-            } else break;
-        }
-        
-        if(contIguais==14){ //Se digito a digito for igual, então o CPF já está cadastrado.
-            return 0;
-        }
-        contIguais = 0; //Precisar zerar para o próximo ciclo.
+    int i;
+
+    for(i = 0; i < qtdUsuarios; i++){
+        if(strcmp(usuarios[i].cpf,cpfTemp)==0) return 0;
     }
     
     return 1;
@@ -69,23 +58,23 @@ int buscaCpfCadastro(char *cpfTemp){
 
 int validarCPF(int cadastro){
     int i;
-    char cpf[15];
-    fgets(cpf, sizeof(cpf),stdin);
+    char cpfTemp[15];
+    fgets(cpfTemp, sizeof(cpfTemp),stdin);
     // Remover quebra de linha se existir
-    cpf[strcspn(cpf, "\n")] = '\0';
+    cpfTemp[strcspn(cpfTemp, "\n")] = '\0';
     // 1. Verificar tamanho
-    if (strlen(cpf) != 14) return 0;
+    if (strlen(cpfTemp) != 14) return 0;
     // 2. Verificar formato fixo XXX.XXX.XXX-XX
-    if (cpf[3] != '.' || cpf[7] != '.' || cpf[11] != '-') return 0;
+    if (cpfTemp[3] != '.' || cpfTemp[7] != '.' || cpfTemp[11] != '-') return 0;
     // 3. Verificar se os dígitos são numéricos
     for (i = 0; i < 14; i++) {
         if (i == 3 || i == 7 || i == 11) continue; // posições de pontuação
 
-        if (!isdigit(cpf[i])) return 0;
+        if (!isdigit(cpfTemp[i])) return 0;
     }
     // 4. Verifica se o CPF já está cadastrado
     if (cadastro == 1) {
-        if (buscaCpfCadastro(cpf)) {strcpy(usuarios_temp.cpf, cpf); return 1;} //Passa o cpf para o usuarios_temp caso tudo estiver correto.
+        if (buscaCpfCadastro(cpfTemp)) {strcpy(usuarios_temp.cpf, cpfTemp); return 1;} //Passa o cpf para o usuarios_temp caso tudo estiver correto.
         else return -1;
     }  
 }
