@@ -69,17 +69,18 @@ int buscaCpfCadastro(char *cpfTemp, struct Usuarios *usuarios, int qtdUsuarios){
     int contIguais = 0;
     
     //Para validar a igualdade estamos usando um for, pois o strcmp não funciona.
-    for(i = 0; i < qtdUsuarios; i++){
+    for(i = 0; i < qtdUsuarios; i++){   
         for(i2 = 0; cpfTemp[i2] != '\0'; i2++){
             if(usuarios[i].cpf[i2]==cpfTemp[i2]){
                 contIguais++;
-            }
+            } else break;
         }
-        contIguais = 0; //Precisar zerar para o próximo ciclo.
+        
         if(contIguais==14){ //Se digito a digito for igual, então o CPF já está cadastrado.
             flag=1;
             return flag;
         }
+        contIguais = 0; //Precisar zerar para o próximo ciclo.
     }
     
     return flag;
