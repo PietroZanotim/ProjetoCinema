@@ -253,6 +253,12 @@ Usuarios cadastro(){
     while (getchar() != '\n'); 
     fgets(usuarios_temp.senha, sizeof(usuarios_temp.senha),stdin);
 
+    limparTela();
+    printf("============================================================\n");
+    printf("Usuário cadastrado com sucesso! Digite enter para continuar:\n");
+    printf("============================================================\n");
+    getchar();
+
     qtdUsuarios++; // Se o usuário foi cadastrado com sucesso, incrementa na variável global.
     return usuarios_temp;
    
