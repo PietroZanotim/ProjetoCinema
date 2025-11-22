@@ -328,7 +328,6 @@ int main(){
     int idReservas=0; // Para marcar o id das reservas;
     // Colocando um tamanho fixo, até vermos vetor dinâmico;
     int qtdFilmes=3; 
-    int contUsuarios=0;
     int qtdReservas=4050;
         
 
@@ -342,8 +341,7 @@ int main(){
                 break;
             
             case 2:
-                usuarios[contUsuarios] = cadastro();
-                contUsuarios++;
+                usuarios[qtdUsuarios] = cadastro();
                 break;
 
             case 3:
