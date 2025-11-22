@@ -74,7 +74,7 @@ int validarCPF(int cadastro){
     int resultado_cadastro = buscaCpfCadastro(cpfTemp);
     if (cadastro == 1) {
         // CPF não está cadastrado
-        if (buscaCpfCadastro == -1) {strcpy(usuarios_temp.cpf, cpfTemp); return 1;} //Passa o cpf para o usuarios_temp caso tudo estiver correto.
+        if (resultado_cadastro == -1) {strcpy(usuarios_temp.cpf, cpfTemp); return 1;} //Passa o cpf para o usuarios_temp caso tudo estiver correto.
         // CPF está cadastrado
         else return -1;
     }
