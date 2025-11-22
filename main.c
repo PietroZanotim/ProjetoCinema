@@ -47,7 +47,7 @@ typedef struct Reservas{
 
 int buscaCpfCadastro(char *cpfTemp){
     int i;
-    for(i = 0; i < qtdUsuarios; i++){
+    for(i = 1; i <= qtdUsuarios; i++){
         if(strcmp(usuarios[i].cpf,cpfTemp)==0) return i; // CPF já está cadastrado
     }
     return -1; // CPF não está cadastrado 
@@ -85,6 +85,9 @@ int validarCPF(int cadastro){
         else return resultado_cadastro;
     }
 }
+
+
+
 
 int validaSenha(struct Usuarios usuarios[], int qtdUsuarios, int posicao){
     int flag=0;
@@ -231,7 +234,7 @@ limparTela();
 //-----------------------------------------------------------------------------
 //---------------------------{ OPCAO 2 - CADASTRO }----------------------------
 //-----------------------------------------------------------------------------
-Usuarios cadastro(){
+void cadastro(){
 
     limparTela(); 
 
@@ -309,7 +312,8 @@ Usuarios cadastro(){
     getchar();
 
     qtdUsuarios++; // Se o usuário foi cadastrado com sucesso, incrementa na variável global.
-    return usuarios_temp;
+
+    usuarios[qtdUsuarios] = usuarios_temp;
    
 }
 
@@ -372,7 +376,6 @@ int main(){
     // Colocando um tamanho fixo, até vermos vetor dinâmico;
     int qtdFilmes=3; 
     int qtdReservas=4050;
-        
 
     while (1) {
         // Inicializa o menu e atribui o valor a variável opcao.
@@ -384,7 +387,8 @@ int main(){
                 break;
             
             case 2:
-                usuarios[qtdUsuarios] = cadastro();
+                
+                cadastro();
                 break;
 
             case 3:
