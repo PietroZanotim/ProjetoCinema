@@ -206,27 +206,26 @@ limparTela();
     printf("           Digite a sua senha\n");
     printf("\n-----------------------------------------\n");
     printf("Senha: ");
-
     
+    while (getchar() != '\n');
+
     while(1){
         // Limpa o buffer de entrada para a próxima iteração
-        while (getchar() != '\n'); 
-
         strcpy(usuarios_temp.senha,"");
-
+        
         fgets(usuarios_temp.senha, sizeof(usuarios_temp.senha),stdin);
         if(strcmp(usuarios_temp.senha,usuarios[resultado_validacao].senha)==0) break;   
         else {
-            puts("\nSenha inválida, digite novamente:");
+            puts("\nSenha inválida. Digite novamente.");
             printf("Senha: ");
         }
 
     }
 
     limparTela();
-    printf("============================================================\n");
+    printf("=========================================================\n");
     printf("Login realizado com sucesso! Digite enter para continuar:\n");
-    printf("============================================================\n");
+    printf("=========================================================\n");
     getchar();
 
 }
