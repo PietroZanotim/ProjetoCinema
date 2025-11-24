@@ -12,16 +12,16 @@
 
 ## 👥 Integrantes do Grupo
 
-* **Nome Completo:** (Adicionar Nome)
-    * **Matrícula:** (Adicionar Matrícula)
-* **Nome Completo:** (Adicionar Nome)
-    * **Matrícula:** (Adicionar Matrícula)
-* **Nome Completo:** (Adicionar Nome)
-    * **Matrícula:** (Adicionar Matrícula)
-* **Nome Completo:** (Adicionar Nome)
-    * **Matrícula:** (Adicionar Matrícula)
-* **Nome Completo:** (Adicionar Nome)
-    * **Matrícula:** (Adicionar Matrícula)
+* **Nome Completo:** Gianluca Justino Agostinho
+    * **Matrícula:** 12511BSI259
+* **Nome Completo:** Letícia Moura Lemos 
+    * **Matrícula:** 12511BSI215
+* **Nome Completo:** Pietro Alves Zanotim
+    * **Matrícula:** 
+* **Nome Completo:** Renan Cesar Vieira Mallagoli 
+    * **Matrícula:** 12511BSI219
+* **Nome Completo:** Rhyan Videira Barros Guidastre
+    * **Matrícula:** 12511BSI201
 
 ---
 
