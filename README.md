@@ -87,21 +87,21 @@ typedef struct Reservas{
 O programa apresenta um menu principal que permite ao usuário navegar por todas as funcionalidades exigidas :
 
 * **Gerenciamento de Sessões (S1):**
-    * [x] Cadastrar, Alterar, Consultar e Remover Sessões .
-    * [x] Listar todas as Sessões cadastradas .
+    * [ ] Cadastrar, Alterar, Consultar e Remover Sessões .
+    * [ ] Listar todas as Sessões cadastradas .
 * **Gerenciamento de Usuários (S2):**
-    * [x] Cadastrar, Alterar, Consultar e Remover Usuários .
-    * [x] Listar todos os Usuários cadastrados .
+    * [ ] Cadastrar, Alterar, Consultar e Remover Usuários .
+    * [ ] Listar todos os Usuários cadastrados .
 * **Gerenciamento de Reservas (S3):**
-    * [x] Cadastrar, Alterar, Consultar e Remover Reservas .
+    * [ ] Cadastrar, Alterar, Consultar e Remover Reservas .
 * **Listagens Avançadas (S3) :**
-    * [x] **Listar por Usuário:** Mostra todas as reservas (com dados da sessão) a partir do CPF de um usuário.
-    * [x] **Listar por Sessão:** Mostra todas as reservas (com dados do usuário) a partir do ID de uma sessão.
-    * [x] **Listar por Data:** Mostra todas as reservas (com dados do usuário e da sessão) a partir de uma data específica.
+    * [ ] **Listar por Usuário:** Mostra todas as reservas (com dados da sessão) a partir do CPF de um usuário.
+    * [ ] **Listar por Sessão:** Mostra todas as reservas (com dados do usuário) a partir do ID de uma sessão.
+    * [ ] **Listar por Data:** Mostra todas as reservas (com dados do usuário e da sessão) a partir de uma data específica.
 * **Relatórios em Arquivo (.txt) :**
-    * [x] **Relatório 1 (Ocupação da Sessão):** Gera um arquivo texto formatado mostrando todos os assentos ocupados e os dados dos usuários para uma sessão específica.
-    * [x] **Relatório 2 (Histórico do Usuário):** Gera um arquivo texto com todas as sessões assistidas por um usuário específico, incluindo datas e valores.
-    * [x] **Relatório 3 (Faturamento por Filme):** Gera um arquivo texto consolidado do faturamento total agrupado por `nome_filme`.
+    * [ ] Relatório 1 (Ocupação por Filme): Gera um arquivo texto listando todas as reservas de um filme específico, cruzando dados do assento (S3) com o nome do cliente (S2) e a sala de exibição (S1).
+    * [ ] Relatório 2 (Ocupação por Data): Gera um arquivo texto com todas as reservas de uma data específica, detalhando o horário e filme (S1), juntamente com o nome do cliente (S2) e assento ocupado (S3).
+    * [ ] Relatório 3 (Histórico do Cliente): Gera um arquivo texto contendo todas as reservas vinculadas a um CPF, incluindo nome do filme e data (S1), além do valor do ingresso pago.
 
 ---
 
