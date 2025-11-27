@@ -16,12 +16,12 @@ int main(){
 
         switch (opcao){
             case 1:
-                executarLogin(listaUsuarios, qtdUsuarios);
+                login(listaUsuarios, qtdUsuarios);
                 break;
             
             case 2:
                 // Passamos o endereço de qtdUsuarios (&) para poder alterar o valor original
-                executarCadastro(listaUsuarios, &qtdUsuarios, MAX_USUARIOS);
+                cadastro(listaUsuarios, &qtdUsuarios, MAX_USUARIOS);
                 break;
 
             case 3:

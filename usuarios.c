@@ -5,16 +5,18 @@
 #include "usuarios.h"
 #include "utils.h"
 
-// --- Funções Auxiliares Internas ---
+//-----------------------------------------------------------------------------
+//---------------------------{ FUNCÕES AUXILIARES }----------------------------
+//-----------------------------------------------------------------------------
 
-int buscaCpfCadastro(Usuarios *lista, int qtd, char *cpfTemp){
+int buscaCpfCadastro(Usuarios *lista, int qtdUsuarios, char *cpfTemp){
     int i;
     for(i = 1; i <= qtdUsuarios; i++){
-        if(strcmp(usuarios[i].cpf,cpfTemp)==0) return i; // CPF já está cadastrado
+        if(strcmp(lista[i].cpf,cpfTemp)==0) return i; // CPF já está cadastrado
     }
     return -1; // CPF não está cadastrado 
 }
-}
+
 
 // modoCadastro: 1 = verificando para cadastrar (não pode existir), 0 = verificando para login (tem que existir)
 // destCpf: ponteiro para onde vamos copiar o CPF validado (pode ser NULL se for login)
@@ -37,9 +39,8 @@ int validarCPF(Usuarios *lista, int qtd, char *destCpf, int modoCadastro){
     // 4. Verifica se o CPF já está cadastrado
     int indiceEncontrado = buscaCpfCadastro(lista, qtd, cpfTemp);
     if (modoCadastro == 1) {
-        // Queremos cadastrar, então NÃO pode existir (-1)
         if (indiceEncontrado == -1) {
-            if(destCpf != NULL) strcpy(destCpf, cpfTemp); 
+            if(destCpf != NULL) strcpy(destCpf, cpfTemp); //Passa o cpf para o destCpf caso tudo estiver correto. 
             return 1; // Sucesso
         }
         else return -1; // Erro: já existe
@@ -116,9 +117,9 @@ void login(Usuarios *lista, int qtdUsuarios){
 //-----------------------------------------------------------------------------
 //---------------------------{ OPCAO 2 - CADASTRO }----------------------------
 //-----------------------------------------------------------------------------
-void cadastro(Usuarios *lista, int *qtd, int max){
+void cadastro(Usuarios *lista, int *qtdUsuarios, int max){
     // Verifica capacidade antes de começar
-    if (*qtd >= max) {
+    if (*qtdUsuarios >= max) {
         printf("Erro: Banco de dados cheio.\n");
         getchar();
         return;
@@ -160,7 +161,7 @@ void cadastro(Usuarios *lista, int *qtd, int max){
         while (getchar() != '\n');
 
         // Passamos o endereço de novoUsuario.cpf para salvar se for validado
-        int resultado_validacao = validarCPF(lista, *qtd, novoUsuario.cpf, 1);
+        int resultado_validacao = validarCPF(lista, *qtdUsuarios, novoUsuario.cpf, 1);
 
         if (resultado_validacao == 1) { // 1: Tudo correto, CPF validado e não cadastrado
             break;
@@ -188,7 +189,7 @@ void cadastro(Usuarios *lista, int *qtd, int max){
     novoUsuario.senha[strcspn(novoUsuario.senha, "\n")] = '\0';
 
     // Persistência no vetor principal
-    // Usamos *qtd como índice e depois incrementamos o valor apontado
+    // Usamos *qtdUsuarios como índice e depois incrementamos o valor apontado
     lista[*qtdUsuarios] = novoUsuario;
     (*qtdUsuarios)++; 
 
