@@ -189,14 +189,14 @@ void cadastro(Usuarios *lista, int *qtdUsuarios, int max){
     novoUsuario.senha[strcspn(novoUsuario.senha, "\n")] = '\0';
 
     // Persistência no vetor principal
-    // Usamos *qtdUsuarios como índice e depois incrementamos o valor apontado
-    lista[*qtdUsuarios] = novoUsuario;
+    // Incrementamos primeiro, porque o usuário 0 será o admin.
     (*qtdUsuarios)++; 
+    lista[*qtdUsuarios] = novoUsuario;
 
     limparTela();
     
     printf("============================================================\n");
-    printf("  Usuario cadastrado com sucesso! [Enter] para continuar...");
+    printf("  Usuario cadastrado com sucesso! [Enter] para continuar...\n");
     printf("============================================================\n");
     getchar();
 }
