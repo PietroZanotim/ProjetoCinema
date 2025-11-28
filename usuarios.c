@@ -128,7 +128,7 @@ void cadastro(Usuarios *lista, int *qtdUsuarios, int max){
     Usuarios novoUsuario; // Variável local temporária (substitui a global usuarios_temp)
 
     limparTela(); 
-     printf("================================================\n");
+    printf("================================================\n");
     printf("                    Cadastro\n");
     printf("================================================\n\n");
     printf("            Digite o seu nome completo         \n");
