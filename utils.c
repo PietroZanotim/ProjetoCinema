@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "utils.h"
+#include "structs.h" // Precisa conhecer a struct Usuarios
 
 void limparTela() {
     #if defined(_WIN32) || defined(_WIN64)
@@ -56,18 +57,18 @@ int menuPrincipal() {
 //-----------------------------------------------------------------------------
 //---------------------------{ MENU DE LOGIN }--------------------------------
 //-----------------------------------------------------------------------------
-void menuLogin(int tipoMenu) {
+void menuLogin(Usuarios *usuario, int indiceUsuario) {
 
     int opcao = 0; // Inicializa com um valor inválido
 
-    if(tipoMenu == 1){
+    if(usuario[indiceUsuario].nome != "admin"){
 
         do {
 
             limparTela(); 
 
             printf("===============================================================\n");
-            printf("       TELA PRINCIPAL - Olá: \n");
+            printf("       TELA PRINCIPAL - Olá: %s\n", usuario[indiceUsuario].nome);
             printf("===============================================================\n\n");
             printf("   [1] - Visualizar filmes disponíveis.\n");
             printf("   [2] - Visualizar minhas sessões.\n");
