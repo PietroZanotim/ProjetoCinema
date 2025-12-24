@@ -43,7 +43,7 @@ int main(){
                                 break;
 
                             case 3:
-
+                                verSaldo(listaUsuarios, indiceUsuario);
                                 break;
 
                             case 4:

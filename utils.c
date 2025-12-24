@@ -55,7 +55,7 @@ int menuPrincipal() {
 }
 
 //-----------------------------------------------------------------------------
-//---------------------------{ MENU DE LOGIN }--------------------------------
+//---------------------------{ MENU DE LOGIN }---------------------------------
 //-----------------------------------------------------------------------------
 int menuLogin(Usuarios *usuario, int indiceUsuario, int *controleAdmin) {
 
@@ -90,7 +90,7 @@ int menuLogin(Usuarios *usuario, int indiceUsuario, int *controleAdmin) {
             }
 
             // Validação de intervalo numérico        
-            if (opcao < 1 || opcao > 7) {
+            if (opcao < 1 || opcao > 8) {
                 printf("\nOpcao invalida! Pressione Enter para tentar novamente.");
                 while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
                 getchar(); // Aguarda o usuário pressionar Enter
@@ -103,8 +103,27 @@ int menuLogin(Usuarios *usuario, int indiceUsuario, int *controleAdmin) {
         return opcao;
 
     } else { // Caso o Login seja do admin, apresentará outras opções;
-
+        
     }
+
+}
+
+//-----------------------------------------------------------------------------
+//---------------------{ VISUALIZAR SALDO DO USUARIO }-------------------------
+//-----------------------------------------------------------------------------
+
+void verSaldo(Usuarios *usuario, int indiceUsuario){
+
+    limparTela();
+
+    printf("===============================================================\n");
+    printf("       Saldo atual - %s\n", usuario[indiceUsuario].nome);
+    printf("===============================================================\n\n");
+    printf("\nSeu saldo atual: R$%.2f\n", usuario[indiceUsuario].saldo);
+
+    printf("\n[Enter] para retornar ao menu login...");
+    while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
+    getchar(); // Aguarda o usuário pressionar Enter
 
 }
 

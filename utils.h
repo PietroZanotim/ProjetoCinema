@@ -7,9 +7,11 @@ void saberFilmes();
 int menuPrincipal();
 int confirmarSaida();
 int confirmarRetorno();
+void verSaldo();
 int voltar();
 int saberFuncionalidade();
 int saberMais();
 int menuLogin();
+
 
 #endif
