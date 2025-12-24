@@ -23,14 +23,15 @@ int main(){
             case 1: // Login do usuario;
                     
                 int indiceUsuario = login(listaUsuarios, qtdUsuarios); // Pegamos a posição do usuario;
-
-                int controleAdmin = 1; // Para sabermos se são opções do admin ou usuario padrão;
                 
-                while(1){
+                if(listaUsuarios[indiceUsuario].cpf=="000.000.000-00") {
+                    //Menu do admin;
 
-                    int opcao = menuLogin(listaUsuarios, indiceUsuario, &controleAdmin);
+                } else {
+                    //Menu dos demais usuarios;
+                    while(1){
 
-                    if(controleAdmin==1){ //Opções caso o usuário seja o usuário padrão
+                    int opcao = menuLogin(listaUsuarios, indiceUsuario);
 
                         switch(opcao){
                             
@@ -70,16 +71,8 @@ int main(){
                                 break; // Break para sair do loop do menu de login;
                             }
                         }
-
-                    } else {
-
-                        switch(opcao){
-                        
-                        }
-                    } 
-                    
+                    }
                 }
-
                 break;
             
             case 2:

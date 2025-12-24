@@ -57,11 +57,9 @@ int menuPrincipal() {
 //-----------------------------------------------------------------------------
 //---------------------------{ MENU DE LOGIN }---------------------------------
 //-----------------------------------------------------------------------------
-int menuLogin(Usuarios *usuario, int indiceUsuario, int *controleAdmin) {
+int menuLogin(Usuarios *usuario, int indiceUsuario) {
 
     int opcao = 0; // Inicializa com um valor inválido
-
-    if(usuario[indiceUsuario].nome != "admin"){ //Se o login não for do admin, apresenta esse menu;
 
         do {
 
@@ -98,13 +96,7 @@ int menuLogin(Usuarios *usuario, int indiceUsuario, int *controleAdmin) {
 
         } while (opcao < 1 || opcao > 8); // Repete o menu se a opção for inválida
         
-        *controleAdmin = 1; //Se o usuario não for admin, o controle continua 1...
-        
         return opcao;
-
-    } else { // Caso o Login seja do admin, apresentará outras opções;
-        
-    }
 
 }
 
