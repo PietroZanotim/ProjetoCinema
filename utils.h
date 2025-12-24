@@ -9,6 +9,6 @@ int confirmarSaida();
 int voltar();
 int saberFuncionalidade();
 int saberMais();
-void menuLogin();
+int menuLogin();
 
 #endif

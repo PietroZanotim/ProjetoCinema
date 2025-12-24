@@ -14,15 +14,35 @@ int main(){
     Sessoes listaSessoes[MAX_SESSOES];
     Reservas listaReservas[MAX_RESERVAS];
 
-    int qtdUsuarios = 0; 
+    int qtdUsuarios = 0;
     
     while (1) {
         int opcao = menuPrincipal();
 
         switch (opcao){
-            case 1:
-                int indiceUsuario = login(listaUsuarios, qtdUsuarios);
-                menuLogin(listaUsuarios, indiceUsuario);
+            case 1: // Login do usuario;
+                    
+                    int indiceUsuario = login(listaUsuarios, qtdUsuarios); // Pegamos a posição do usuario;
+
+                    int controleAdmin = 1; // Para sabermos se são opções do admin ou usuario padrão;
+
+                    int opcao = menuLogin(listaUsuarios, indiceUsuario, &controleAdmin);
+
+                    if(controleAdmin==1){
+
+                        switch(opcao){
+                            
+                            
+
+                        }
+
+                    } else {
+
+                        switch(opcao){
+                        
+                        }
+                    } 
+
                 break;
             
             case 2:
