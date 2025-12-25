@@ -57,12 +57,8 @@ int main(){
                             case 6:
 
                                 break;
-
-                            case 7:
-                                break;
-
                         }
-                        if(opcao==7){
+                        if(opcao==6){
                             if (confirmarRetorno() == 1){
                                 break; // Break para sair do loop do menu de login;
                             }
