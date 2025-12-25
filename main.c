@@ -3,6 +3,7 @@
 #include "structs.h"
 #include "utils.h"
 #include "usuarios.h"
+#include "sessoes.h"
 
 #define MAX_USUARIOS 5
 #define MAX_SESSOES 5
@@ -16,6 +17,7 @@ int main(){
 
     int qtdUsuarios = 0;
     int qtdSessoes = 0;
+    int qtdReservas = 0;
     
     while (1) {
         int opcao = menuPrincipal();
@@ -37,7 +39,7 @@ int main(){
                         switch(opcao){
                             
                             case 1:
-
+                                listarSessoes(listaSessoes, qtdSessoes, listaUsuarios, indiceUsuario, listaReservas, &qtdReservas);
                                 break;
 
                             case 2:

@@ -14,7 +14,7 @@ int buscaSessao(Sessoes *sessao,int id, int qtdSessoes){
     return -1;
 }
 
-void listarSessoes(Sessoes *sessao, int quantidadeSessoes, Usuarios *usuario, int indiceUsuario){
+void listarSessoes(Sessoes *sessao, int quantidadeSessoes, Usuarios *usuario, int indiceUsuario, Reservas *reserva, int *qtdReservas){
 
     limparTela();
 
@@ -93,10 +93,28 @@ void listarSessoes(Sessoes *sessao, int quantidadeSessoes, Usuarios *usuario, in
             scanf("%d", &colunaAssento);
             colunaAssento -= 1;
 
-            if(sessao[indiceSessao].assento[linhaAssento][colunaAssento]=='X'){
+            if(sessao[indiceSessao].assento[linhaAssento][colunaAssento]=='X'){ 
                 printf("Sentimos muito, este assento está ocupado...\n");
             }
+            //Assentos com o char "O" estarão livres, e os com "X", ocupados;
         } while (sessao[indiceSessao].assento[linhaAssento][colunaAssento]=='X');
+
+        usuario[indiceUsuario].saldo -= sessao[indiceSessao].valorIngresso; // Dando baixa no saldo do usuário;
+
+        reserva[*qtdReservas].id = *qtdReservas;
+        reserva[*qtdReservas].id_sessao = sessao[indiceSessao].id;
+        strcpy(reserva[*qtdReservas].cpf_usuario,usuario[indiceUsuario].cpf);
+
+        //reserva[*qtdReservas].assento = ??? Devemos analisar depois como atribuir...
+        
+        *qtdReservas++;
+
+        limparTela();
+        printf("==============================================\n");
+        printf("      Ingresso adquirido com sucesso!");
+        printf("\n==============================================\n");
+        printf("\n[Enter] para retornar ao menu login...");
+        getchar(); // Aguarda o usuário enviar o enter
 
     } else {
         limparTela();
