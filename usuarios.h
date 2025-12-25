@@ -1,3 +1,7 @@
+//--------------------------!! SOBRE O ARQUIVO !!------------------------------
+//---------------{ FUNCOES QUE ALTERAM A STRUCT DE USUÁRIO }-------------------
+//-----------------------------------------------------------------------------
+
 #ifndef USUARIOS_H
 #define USUARIOS_H
 
@@ -9,5 +13,8 @@ int buscaCpfCadastro(Usuarios *lista, int qtdUsuarios, char *cpfTemp);
 int validarCPF(Usuarios *lista, int qtdUsuarios, char *destCpf, int modoCadastro);
 int login(Usuarios *lista, int qtdUsuarios);
 void cadastro(Usuarios *lista, int *qtdUsuarios, int max);
+int menuLogin(Usuarios *usuario, int indiceUsuario);
+void realizarDeposito(Usuarios *usuario, int indiceUsuario);
+void verSaldo(Usuarios *usuario, int indiceUsuario);
 
 #endif

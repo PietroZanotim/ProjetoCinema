@@ -1,3 +1,7 @@
+//---------------------------!! SOBRE O ARQUIVO !!-----------------------------
+//-----------{ FUNCOES QUE NÃO POSSUEM COMO PARAMENTRO O USUÁRIO }-------------
+//-----------------------------------------------------------------------------
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -52,148 +56,6 @@ int menuPrincipal() {
 
     // Retorna a opção válida (1, 2, 3 ou 4)
     return opcao;
-}
-
-//-----------------------------------------------------------------------------
-//---------------------------{ MENU DE LOGIN }---------------------------------
-//-----------------------------------------------------------------------------
-int menuLogin(Usuarios *usuario, int indiceUsuario) {
-
-    int opcao = 0; // Inicializa com um valor inválido
-
-        do {
-
-            limparTela(); 
-
-            printf("===============================================================\n");
-            printf("       TELA PRINCIPAL - Olá: %s\n", usuario[indiceUsuario].nome);
-            printf("===============================================================\n");
-            printf("   [1] - Visualizar filmes disponíveis.\n");
-            printf("   [2] - Visualizar minhas sessões.\n");
-            printf("   [3] - Visualizar meu saldo.\n");
-            printf("   [4] - Comprar ingresso.\n"); 
-            printf("   [5] - Alterar senha.\n"); // Alteração dos registros.
-            printf("   [6] - Excluir esta conta.\n"); // Remoção dos registros.
-            printf("   [7] - Voltar ao menu inicial\n");
-            printf("\n--------------------------------------------\n");
-            printf("Digite a opcao desejada: ");
-
-            // Validação de tipo de input
-            if (scanf("%d", &opcao) != 1) {
-                // Se o scanf falhar (ex: usuário digitou 'a' em vez de '1'),
-                // limpamos o buffer de entrada para evitar um loop infinito.
-                opcao = 0; // Reseta para um valor inválido
-                while (getchar() != '\n'); // Limpa o buffer
-            }
-
-            // Validação de intervalo numérico        
-            if (opcao < 1 || opcao > 7) {
-                printf("\nOpcao invalida! Pressione Enter para tentar novamente.");
-                while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
-                getchar(); // Aguarda o usuário pressionar Enter
-            }
-
-        } while (opcao < 1 || opcao > 7); // Repete o menu se a opção for inválida
-        
-        return opcao;
-
-}
-
-//-----------------------------------------------------------------------------
-//---------------------{ VISUALIZAR SALDO DO USUARIO }-------------------------
-//-----------------------------------------------------------------------------
-
-void verSaldo(Usuarios *usuario, int indiceUsuario){
-
-    limparTela();
-
-    printf("===============================================================\n");
-    printf("              Saldo de: %s\n", usuario[indiceUsuario].nome);
-    printf("===============================================================\n\n");
-    printf("\nSeu saldo atual: R$%.2f\n", usuario[indiceUsuario].saldo);
-
-    char resposta;
-    
-    do{
-    printf("\nDeseja realizar um depósito? (S/N)");
-    if (scanf(" %c", &resposta) != 1) {
-            resposta = ' '; // Define como inválido se o scanf falhar
-        }
-
-        // Limpa o buffer de entrada para a próxima iteração
-        while (getchar() != '\n'); 
-
-        resposta = toupper(resposta); // Converte para maiúsculo
-
-        if (resposta != 'S' && resposta != 'N') {
-            printf("\nOpcao invalida! Digite S ou N.\n Pressione Enter para tentar novamente.");
-            while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
-            getchar(); // Aguarda o usuário pressionar Enter
-        }
-
-    } while (resposta != 'S' && resposta != 'N');
-
-    if(resposta=='S'){
-        float valorDeposito;
-        printf("\nDigite o valor que deseja depositar: ");
-
-        while(scanf("%f", &valorDeposito)!=1 || valorDeposito>100.00){
-        printf("\nValor digitado inválido ou acima do permitido!");
-        printf("\n[Enter] para tentar novamente.");
-        while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
-        getchar(); // Aguarda o usuário pressionar Enter
-        }
-
-    usuario[indiceUsuario].saldo += valorDeposito;
-
-    limparTela();
-    printf("===============================================================\n");
-    printf("                 Depósito realizado com sucesso!");
-    printf("\n===============================================================\n");
-
-    } else {
-        limparTela();
-    }
-
-    printf("\n[Enter] para retornar ao menu login...");
-    getchar(); // Aguarda o usuário pressionar Enter
-
-}
-
-//-----------------------------------------------------------------------------
-//------------------{ REALIZAR DEPÓSITO NO SALDO DO USUARIO }------------------
-//-----------------------------------------------------------------------------
-
-void realizarDeposito(Usuarios *usuario, int indiceUsuario){
-
-    limparTela();
-
-    float valorDeposito=0.00;
-
-    printf("===============================================================\n");
-    printf("       Saldo de: - %s\n", usuario[indiceUsuario].nome);
-    printf("===============================================================\n\n");
-    printf("\n*** MAX - R$100.00 | POR OPERAÇÃO ***");
-    printf("\nDigite o valor que deseja depositar: ");
-
-    while(scanf("%f", &valorDeposito)!=1 || valorDeposito>100.00){
-        printf("\nValor digitado inválido ou acima do permitido!");
-        printf("\n[Enter] para tentar novamente.");
-        while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
-        getchar(); // Aguarda o usuário pressionar Enter
-    }
-
-    usuario[indiceUsuario].saldo += valorDeposito;
-
-    limparTela();
-    printf("===============================================================\n");
-    printf("                 Depósito realizado com sucesso!");
-    printf("\n===============================================================\n");
-
-    printf("\n[Enter] para retornar ao menu login...");
-    while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
-    getchar(); // Aguarda o usuário pressionar Enter
-
 }
 
 //-----------------------------------------------------------------------------
@@ -337,16 +199,6 @@ int saberFuncionalidades(){
     }
 }
 
-//Função para explicar como funciona as sessões e horários dos filmes
-void saberHorarios(){
-
-}
-
-//Função para mostrar os detalhes dos filmes disponíveis
-void saberFilmes(){
-
-}
-
 
 
 int saberMais(){
@@ -388,12 +240,13 @@ int saberMais(){
             saberFuncionalidades();
         }
         else if(escolha == 2){
-            saberFilmes();
+            
         }
         else if(escolha == 3){
-           saberFilmes();
+           
         }
         else{
+            limparTela();
             break;
         }
     } while(escolha != 4);

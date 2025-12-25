@@ -1,3 +1,8 @@
+//---------------------------!! SOBRE O ARQUIVO !!-----------------------------
+//-----------{ FUNCOES QUE NÃO POSSUEM COMO PARAMENTRO O USUÁRIO }-------------
+//-----------------------------------------------------------------------------
+
+
 #ifndef UTILS_H
 #define UTILS_H
 
@@ -7,11 +12,9 @@ void saberFilmes();
 int menuPrincipal();
 int confirmarSaida();
 int confirmarRetorno();
-void verSaldo();
 int voltar();
 int saberFuncionalidade();
 int saberMais();
-int menuLogin();
 
 
 #endif
