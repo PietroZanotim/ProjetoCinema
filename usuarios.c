@@ -278,7 +278,7 @@ void verSaldo(Usuarios *usuario, int indiceUsuario){
     char resposta;
     
     do{
-        printf("\nDeseja realizar um depósito? (S/N)");
+        printf("\nDeseja realizar um depósito? (S/N): ");
         if (scanf(" %c", &resposta) != 1) {
             resposta = ' '; // Define como inválido se o scanf falhar
         }
@@ -308,22 +308,22 @@ void verSaldo(Usuarios *usuario, int indiceUsuario){
             getchar(); // Aguarda o usuário pressionar Enter
             limparTela();
             printf("\nDigite o valor que deseja depositar: ");
-            scanf("%f", &valorDeposito);
         }
 
-        usuario[indiceUsuario].saldo += valorDeposito;
+        usuario[indiceUsuario].saldo += valorDeposito*1.0;
 
         limparTela();
         printf("===============================================================\n");
         printf("                 Depósito realizado com sucesso!");
         printf("\n===============================================================\n");
+        printf("\n[Enter] para retornar ao menu login...");
+        while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
+        getchar(); // Aguarda o usuário enviar o enter
 
     } else {
         limparTela();
+        printf("\n[Enter] para retornar ao menu login...");
+        getchar(); // Aguarda o usuário enviar o enter
     }
-
-    printf("\n[Enter] para retornar ao menu login...");
-    while (getchar() != '\n'); // Consome o buffer
-    getchar(); // Aguarda o usuário enviar o enter
 }
 
