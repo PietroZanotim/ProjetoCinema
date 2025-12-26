@@ -16,5 +16,10 @@ int voltar();
 int saberFuncionalidade();
 int saberMais();
 
+// Adicionar
+int buscar_indice_sessao(int id_sessao);
+int buscar_indice_usuario(char* cpf);
+int buscar_indice_reserva(int id_reserva);
+
 
 #endif

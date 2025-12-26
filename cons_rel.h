@@ -1,0 +1,22 @@
+//--------------------------!! SOBRE O ARQUIVO !!------------------------------
+//------------------ -----{ CONSULTAS E RELATÓRIOS }---------------------------
+//-----------------------------------------------------------------------------
+
+#ifndef CONS_REL_H  // Guardas de inclusão (evita erro de redefinição)
+#define CONS_REL_H
+
+#include "structs.h" // Precisa conhecer a struct Usuarios
+
+// --- CONSULTAS NA TELA (Requisito 5f - Output Terminal) ---
+// Deve mostrar dados da Reserva + Nome do Filme + Nome do Usuário 
+void CONS_reservas_por_filme();
+void CONS_reservas_por_data();
+void CONS_reservas_por_cpf();
+
+// --- RELATÓRIOS EM TXT (Requisito 5g - Output Arquivo) ---
+// Gera arquivo .txt formatado com as mesmas lógicas acima 
+void REL_reservas_por_filme();
+void REL_reservas_por_data();
+void REL_reservas_por_cpf();
+
+#endif
