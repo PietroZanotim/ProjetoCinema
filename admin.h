@@ -22,7 +22,7 @@ void modificar_sessao();
 void adicionar_usuario();
 void excluir_usuario();
 void modificar_usuario(); 
-void visualizar_usuario_id();
+void visualizar_usuario_cpf();
 void visualizar_todos_usuarios();
 
 // --- CRUD RESERVA (Estrutura 3 - Relacional) ---

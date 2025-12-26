@@ -79,7 +79,7 @@ int login(Usuarios *lista, int qtdUsuarios){
 
         if (indiceUsuario == 0) { // 0: CPF em formato incorreto
             puts("\nVocê digitou o CPF incorretamente.");
-            puts("Digite o seu CPF neste fomato XXX.XXX.XXX-XX");
+            puts("Digite o seu CPF neste formato XXX.XXX.XXX-XX");
             printf("CPF: ");
         } else if (indiceUsuario == -1) { // -1: CPF já está cadastrado
             puts("\nEsse CPF não foi encontrado.");
