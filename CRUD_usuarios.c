@@ -143,40 +143,45 @@ void excluir_usuario(Usuarios *lista, int *qtdUsuarios){
     } else {
 
         limparTela();
-            printf("==========================================================\n");
-            printf("           Usuário: %s\n", lista[resultado_validacao].nome);
-            printf("==========================================================\n");
-            printf("Idade: %d\n.", lista[resultado_validacao].idade);
-            printf("CPF: %s.\n", lista[resultado_validacao].cpf);
-            printf("Senha: %d.\n", lista[resultado_validacao].senha);
-            printf("Saldo: %.2f.\n", lista[resultado_validacao].saldo);
+        printf("==========================================================\n");
+        printf("           Usuário: %s\n", lista[resultado_validacao].nome);
+        printf("==========================================================\n");
+        printf("Idade: %d\n.", lista[resultado_validacao].idade);
+        printf("CPF: %s.\n", lista[resultado_validacao].cpf);
+        printf("Senha: %d.\n", lista[resultado_validacao].senha);
+        printf("Saldo: %.2f.\n", lista[resultado_validacao].saldo);
         
         char resposta;
 
         do{
-        printf("\nDeseja confirmar a exclusão? (S/N): ");
-        if (scanf(" %c", &resposta) != 1) {
+            printf("\nDeseja confirmar a exclusão? (S/N): ");
+            if (scanf(" %c", &resposta) != 1) {
             resposta = ' '; // Define como inválido se o scanf falhar
-        }
+            }
 
-        // Limpa o buffer de entrada para a próxima iteração
-        while (getchar() != '\n'); 
+            // Limpa o buffer de entrada para a próxima iteração
+            while (getchar() != '\n'); 
 
-        resposta = toupper(resposta); // Converte para maiúsculo
+            resposta = toupper(resposta); // Converte para maiúsculo
 
-        if (resposta != 'S' && resposta != 'N') {
-            printf("\nOpcao invalida! Digite S ou N.\n Pressione Enter para tentar novamente.");
-            while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
-            getchar(); // Aguarda o usuário pressionar Enter
-        }
+            if (resposta != 'S' && resposta != 'N') {
+                printf("\nOpcao invalida! Digite S ou N.\n Pressione Enter para tentar novamente.");
+                while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
+                getchar(); // Aguarda o usuário pressionar Enter
+            }
 
-    } while (resposta != 'S' && resposta != 'N');
+        } while (resposta != 'S' && resposta != 'N');
 
-        if(resposta=='S'){
+            if(resposta=='S'){
             
-            
+            //"Exclusão" dos dados do usuário...
+            strcpy(lista[resultado_validacao].nome,"");
+            lista[resultado_validacao].idade = 0;
+            strcpy(lista[resultado_validacao].cpf,"");
+            lista[resultado_validacao].saldo = 0.00;
+            strcpy(lista[resultado_validacao].senha,"");
 
-        }
+            }
 
         printf("\n[Enter] para continuar...\n");
         getchar();
