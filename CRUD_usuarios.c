@@ -190,7 +190,228 @@ void excluir_usuario(Usuarios *lista, int *qtdUsuarios){
 
 }
 
-void modificar_usuario();
+void modificar_usuario(Usuarios *lista, int *qtdUsuarios){
+
+    limparTela();
+    printf("================================================\n");
+    printf("              Modificação de usuário\n");
+    printf("================================================\n\n");
+    printf("            Digite o CPF do usuário        \n");
+    printf("\n----------------------------------------------\n");
+    printf("CPF: ");
+
+    int resultado_validacao; //Usado para pegarmos o indice do usuário.
+    int contErros=0; //Adicionei essa váriavel para caso o usuário erre 3 vezes o CPF na busca, saia deste menu;
+
+    while (1) {
+        if(contErros==3){
+            break;
+        }
+        // Limpa o buffer sempre antes de ler
+        while (getchar() != '\n');
+
+        // Passamos o endereço de novoUsuario.cpf para salvar se for validado
+        int resultado_validacao = validarCPF(lista, *qtdUsuarios, NULL, 0); //Usamos o validar cpf como no login, para validar se existe este CPF;
+
+        if (resultado_validacao == 0) {
+             // 0: CPF em formato incorreto
+            puts("\nVocê digitou o CPF incorretamente.");
+            puts("Digite o seu CPF neste formato XXX.XXX.XXX-XX");
+            printf("CPF: ");
+            contErros++;
+        } else if(resultado_validacao == -1) { 
+            puts("\nEsse CPF não foi encontrado.");
+            printf("CPF: ");
+            contErros++;
+        } else {
+             // Aqui ele retorna apenas o indice do usuario... Tudo ok, basta imprimir os dados.
+            break;
+        }
+    }
+
+    if(contErros==3){
+        limparTela();
+        printf("==================================================================\n");
+        printf("  Número máximo de tentativas atingidas! [Enter] para continuar...\n");
+        printf("==================================================================\n");
+        getchar();
+    } else {
+
+        limparTela();
+        printf("==========================================================\n");
+        printf("           Usuário: %s\n", lista[resultado_validacao].nome);
+        printf("==========================================================\n");
+        printf("Idade: %d\n.", lista[resultado_validacao].idade);
+        printf("CPF: %s.\n", lista[resultado_validacao].cpf);
+        printf("Senha: %d.\n", lista[resultado_validacao].senha);
+        
+        printf("---------------------------------------------------------------\n");
+        printf("   [1] - Alterar nome.\n");
+        printf("   [2] - Alterar idade.\n");
+        printf("   [3] - Alterar CPF.\n");
+        printf("   [4] - Alterar senha.\n"); // Alteração dos registros.
+        printf("---------------------------------------------------------------\n");
+        printf("Digite a opcao desejada: ");
+
+        int opcao=0;
+
+        do{
+            // Validação de tipo de input
+            if (scanf("%d", &opcao) != 1) {
+                // Se o scanf falhar (ex: usuário digitou 'a' em vez de '1'),
+                // limpamos o buffer de entrada para evitar um loop infinito.
+                opcao = 0; // Reseta para um valor inválido
+                while (getchar() != '\n'); // Limpa o buffer
+            }
+
+            // Validação de intervalo numérico        
+            if (opcao < 1 || opcao > 4) {
+                printf("\nOpcao invalida! Pressione Enter para tentar novamente.");
+                while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
+                getchar(); // Aguarda o usuário pressionar Enter
+            }
+
+        } while (opcao < 1 || opcao > 4); // Repete o menu se a opção for inválida
+
+
+        switch(opcao){
+
+            case 1:
+
+            limparTela();
+            printf("==========================================================\n");
+            printf("           Usuário: %s\n", lista[resultado_validacao].nome);
+            printf("==========================================================\n");
+            printf("Nome atualizado: ");
+            getchar();
+
+            char nome[70];
+            fgets(nome,70,stdin);
+            nome[strcspn(nome,"\n")] = '\0';
+
+            strcpy(lista[resultado_validacao].nome,nome);
+
+            limparTela();
+            printf("===============================================================\n");
+            printf("                 Nome atualizado com sucesso!");
+            printf("\n===============================================================\n");
+            printf("\n[Enter] para retornar ao menu login...");
+            while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
+            getchar(); // Aguarda o usuário enviar o enter
+
+            break;
+
+            case 2:
+
+            limparTela();
+            printf("==========================================================\n");
+            printf("           Usuário: %s\n", lista[resultado_validacao].nome);
+            printf("==========================================================\n");
+            printf("Idade atualizada: ");
+
+            int idade;
+
+            while(scanf(" %d", &idade) != 1 || idade >= 100){
+                printf("\nIdade inválida, digite novamente: ");
+                getchar();
+            }
+
+            lista[resultado_validacao].idade = idade;
+
+            limparTela();
+            printf("===============================================================\n");
+            printf("                 Idade atualizada com sucesso!");
+            printf("\n===============================================================\n");
+            printf("\n[Enter] para retornar ao menu login...");
+            while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
+            getchar(); // Aguarda o usuário enviar o enter
+
+            break;
+
+            case 3:
+
+            limparTela();
+            printf("==========================================================\n");
+            printf("           Usuário: %s\n", lista[resultado_validacao].nome);
+            printf("==========================================================\n");
+            printf("CPF atualizado: ");
+
+            int resultado_validacaoLocal; //Usado para pegarmos o indice do usuário.
+            int contErros=0; //Adicionei essa váriavel para caso o usuário erre 3 vezes o CPF na busca, saia deste menu;
+
+            while (1) {
+
+                if(contErros==3){
+                break;
+                }
+                // Limpa o buffer sempre antes de ler
+                while (getchar() != '\n');
+
+                // Passamos o endereço de novoUsuario.cpf para salvar se for validado
+                int resultado_validacaoLocal = validarCPF(lista, *qtdUsuarios, NULL, 0); //Usamos o validar cpf como no login, para validar se existe este CPF;
+
+                if (resultado_validacaoLocal == 0) {
+                    // 0: CPF em formato incorreto
+                    puts("\nVocê digitou o CPF incorretamente.");
+                    puts("Digite o seu CPF neste formato XXX.XXX.XXX-XX");
+                    printf("CPF: ");
+                    contErros++;
+                } else if(resultado_validacaoLocal == -1) { 
+                    //Cópia o CPF para o do usuario, a verificar...
+                    break;
+                    contErros++;
+                } else {
+                    puts("\nEsse CPF esta sendo utilizado.");
+                    printf("CPF: ");
+                    contErros++;
+                }
+            }
+
+            if(contErros==3){
+                limparTela();
+                printf("==================================================================\n");
+                printf("  Número máximo de tentativas atingidas! [Enter] para continuar...\n");
+                printf("==================================================================\n");
+                getchar();
+            } else {
+                limparTela();
+                printf("===============================================================\n");
+                printf("                 CPF atualizado com sucesso!");
+                printf("\n===============================================================\n");
+                printf("\n[Enter] para retornar ao menu login...");
+                while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
+                getchar(); // Aguarda o usuário enviar o enter
+            }
+
+            break;
+
+            case 4:
+
+            limparTela();
+            printf("==========================================================\n");
+            printf("           Usuário: %s\n", lista[resultado_validacao].nome);
+            printf("==========================================================\n");
+            printf("Senha atualizada: ");
+
+            char senha[15];
+            fgets(nome,15,stdin);
+            nome[strcspn(nome,"\n")] = '\0';
+
+            strcpy(lista[resultado_validacao].nome,nome);
+
+            limparTela();
+            printf("===============================================================\n");
+            printf("                 Senha atualizada com sucesso!");
+            printf("\n===============================================================\n");
+            printf("\n[Enter] para retornar ao menu login...");
+            while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
+            getchar(); // Aguarda o usuário enviar o enter
+
+            break;
+
+        }
+    }
+}
 
 void visualizar_usuario_cpf(Usuarios *lista, int *qtdUsuarios){ 
 
