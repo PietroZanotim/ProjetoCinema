@@ -325,4 +325,3 @@ void verSaldo(Usuarios *usuario, int indiceUsuario){
         getchar(); // Aguarda o usuário enviar o enter
     }
 }
-

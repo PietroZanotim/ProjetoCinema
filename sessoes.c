@@ -31,7 +31,7 @@ void listarSessoes(Sessoes *sessao, int quantidadeSessoes, Usuarios *usuario, in
         printf("Valor: %d\n", sessao[i].valorIngresso);
         printf("Assentos:\n");
         
-        char Linha = {A, B, C, D, E, F, G, H, I, J};
+        char Linha[10] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
 
         for(int L = 1; L <= 10; L++){
             for(int C = 1; C <= 10; C++){
