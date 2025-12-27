@@ -8,6 +8,7 @@
 #include "structs.h" // Precisa conhecer a struct Usuarios
 
 // --- CRUD RESERVA (Estrutura 3 - Relacional) ---
+int menu_CRUD_reservas();
 void adicionar_reserva();
 void excluir_reserva();
 void modificar_reserva();
