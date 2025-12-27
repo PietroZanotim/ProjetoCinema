@@ -17,7 +17,12 @@ int main(){
     Sessoes listaSessoes[MAX_SESSOES];
     Reservas listaReservas[MAX_RESERVAS];
 
-    int qtdUsuarios = 0;
+    // Sistema temporário para acessar o admin
+    strcpy(listaUsuarios[0].nome, "Admin");
+    strcpy(listaUsuarios[0].cpf, "000.000.000-00");
+    strcpy(listaUsuarios[0].senha, "123senha");
+
+    int qtdUsuarios = 1; // 1 por causa do Admin
     int qtdSessoes = 0;
     int qtdReservas = 0;
     
@@ -29,7 +34,7 @@ int main(){
                     
                 int indiceUsuario = login(listaUsuarios, qtdUsuarios); // Pegamos a posição do usuario;
                 
-                if (strcmp(listaUsuarios[indiceUsuario].cpf, "000.000.000-00") == 0) {
+                if (indiceUsuario == 0) {
                     // Menu do admin
                     menuAdmin(); 
                 } else {

@@ -15,7 +15,7 @@
 
 int buscaCpfCadastro(Usuarios *lista, int qtdUsuarios, char *cpfTemp){
     int i;
-    for(i = 1; i <= qtdUsuarios; i++){
+    for(i = 0; i < qtdUsuarios; i++){
         if(strcmp(lista[i].cpf,cpfTemp)==0) return i; // CPF já está cadastrado
     }
     return -1; // CPF não está cadastrado 
@@ -32,13 +32,13 @@ int validarCPF(Usuarios *lista, int qtd, char *destCpf, int modoCadastro){
     // Remover quebra de linha se existir
     cpfTemp[strcspn(cpfTemp, "\n")] = '\0';
     // 1. Verificar tamanho
-    if (strlen(cpfTemp) != 14) return 0;
+    if (strlen(cpfTemp) != 14) return -2;
     // 2. Verificar formato fixo XXX.XXX.XXX-XX
     if (cpfTemp[3] != '.' || cpfTemp[7] != '.' || cpfTemp[11] != '-') return 0;
     // 3. Verificar se os dígitos são numéricos
     for (i = 0; i < 14; i++) {
         if (i == 3 || i == 7 || i == 11) continue;
-        if (!isdigit(cpfTemp[i])) return 0;
+        if (!isdigit(cpfTemp[i])) return -2;
     }
     // 4. Verifica se o CPF já está cadastrado
     int indiceEncontrado = buscaCpfCadastro(lista, qtd, cpfTemp);
@@ -55,7 +55,6 @@ int validarCPF(Usuarios *lista, int qtd, char *destCpf, int modoCadastro){
         if (indiceEncontrado == -1) return -1; 
         else return indiceEncontrado;
     }
-    return 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -77,7 +76,7 @@ int login(Usuarios *lista, int qtdUsuarios){
         // Passamos NULL no destCpf pois no login não vamos salvar o CPF em lugar nenhum por enquanto
         indiceUsuario = validarCPF(lista, qtdUsuarios, NULL, 0); 
 
-        if (indiceUsuario == 0) { // 0: CPF em formato incorreto
+        if (indiceUsuario == -2) { // -2: CPF em formato incorreto
             puts("\nVocê digitou o CPF incorretamente.");
             puts("Digite o seu CPF neste formato XXX.XXX.XXX-XX");
             printf("CPF: ");
@@ -179,7 +178,7 @@ void cadastro(Usuarios *lista, int *qtdUsuarios, int max){
 
         if (resultado_validacao == 1) { // 1: Tudo correto, CPF validado e não cadastrado
             break;
-        } else if (resultado_validacao == 0) { // 0: CPF em formato incorreto
+        } else if (resultado_validacao == -2) { // -2: CPF em formato incorreto
             puts("\nVocê digitou o CPF incorretamente.");
             puts("Digite o seu CPF neste fomato XXX.XXX.XXX-XX");
             printf("CPF: ");
@@ -202,10 +201,12 @@ void cadastro(Usuarios *lista, int *qtdUsuarios, int max){
     fgets(novoUsuario.senha, sizeof(novoUsuario.senha), stdin);
     novoUsuario.senha[strcspn(novoUsuario.senha, "\n")] = '\0';
 
-    // Persistência no vetor principal
-    // Incrementamos primeiro, porque o usuário 0 será o admin.
-    (*qtdUsuarios)++; 
+    // IndiceUsuario do admin é 0, portanto, para os próximos usuários: IndiceUsuario = qtdUsuario
+    // Antes de incrementar o qtdUsuario
     lista[*qtdUsuarios] = novoUsuario;
+
+    // Incrementamos a quantidade de usuários
+    (*qtdUsuarios)++; 
 
     limparTela();
     
