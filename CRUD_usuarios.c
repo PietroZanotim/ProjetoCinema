@@ -498,3 +498,39 @@ void visualizar_todos_usuarios(Usuarios *lista, int qtdUsuario){
     getchar();
 
 }
+
+int menu_CRUD_usuarios(){
+    int opcao;
+    do{
+        limparTela(); 
+
+        printf("===============================================================\n");
+        printf("                       CRUD de Usuários\n");
+        printf("===============================================================\n\n");
+        printf("   [1] - Adicionar usuário\n");
+        printf("   [2] - Excluir usuário\n");
+        printf("   [3] - Modificar usuário\n");
+        printf("   [4] - Visualizar usuário por CPF\n"); 
+        printf("   [5] - Visualizar todos os usuários\n"); 
+        printf("   [6] - Voltar ao menu inicial\n\n");
+        printf("---------------------------------------------------------------\n");
+        printf("Digite a opcao desejada: ");
+
+        // Validação de tipo de input
+        if (scanf("%d", &opcao) != 1) {
+            // Se o scanf falhar (ex: usuário digitou 'a' em vez de '1'),
+            // limpamos o buffer de entrada para evitar um loop infinito.
+            opcao = 0; // Reseta para um valor inválido
+            while (getchar() != '\n'); // Limpa o buffer
+        }
+
+        // Validação de intervalo numérico        
+        if (opcao < 1 || opcao > 6) {
+            printf("\nOpcao invalida! Pressione Enter para tentar novamente.");
+            while (getchar() != '\n'); // Limpa o buffer (caso tenha sobrado algo)
+            getchar(); // Aguarda o usuário pressionar Enter
+        }
+    } while(opcao < 1 || opcao > 6);
+
+    return opcao;
+}

@@ -6,6 +6,7 @@
 #include "usuarios.h"
 #include "sessoes.h"
 #include "admin.h"
+#include "CRUD_usuarios.h"
 
 #define MAX_USUARIOS 5
 #define MAX_SESSOES 5
@@ -44,6 +45,30 @@ int main(){
                                 break;
                             case 2:
                                 // CRUD de Usuários
+                                while(1){
+                                    int opcao_1 = menu_CRUD_usuarios();
+                                    switch(opcao_1){
+                                        case 1:
+                                            adicionar_usuario();
+                                            break;
+                                        case 2:
+                                            excluir_usuario();
+                                            break;
+                                        case 3:
+                                            modificar_usuario();
+                                            break;
+                                        case 4:
+                                            visualizar_usuario_cpf();
+                                            break;
+                                        case 5:
+                                            visualizar_todos_usuarios();
+                                            break;
+                                    }
+                                    if (opcao_1 == 6){
+                                        if(confirmarRetorno() == 1) break;
+                                        else continue;
+                                    }
+                                }
                                 break;
                             case 3:
                                 // CRUD de Reservas

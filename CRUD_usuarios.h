@@ -9,6 +9,7 @@
 
 
 // --- CRUD USUÁRIO (Estrutura 2) ---
+int menu_CRUD_usuarios();
 void adicionar_usuario();
 void excluir_usuario();
 void modificar_usuario(); 
